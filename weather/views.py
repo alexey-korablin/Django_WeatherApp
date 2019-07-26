@@ -8,8 +8,10 @@ from .forms import CityForm
 
 
 def index(request):
-    appid = '25f3763955aaaf6059e58f006fb85083'  # этот ключ генерируется при регистрации на сервиче
-    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid
+    appid = '25f3763955aaaf6059e58f006fb85083'  # этот ключ генерируется при регистрации на сервисе. Нужен для
+                                                # выполнения запросов к API
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + appid  # {} - скобки в адресе
+    # служат для подстановки параметров, в данному случае названия города
 
     if request.method == 'POST':
         form = CityForm(request.POST)
@@ -41,4 +43,4 @@ def index(request):
 
     return render(request, 'weather/index.html', context)    # возвращает результат вызова функции render, одним из
     # параметров которой является шаблон. Не указываем папку templates, потому что поиск по умолчанию ведется там.
-    # Данные передаются через третий параметр функции render
+    # Данные передаются через третий параметр функции render - context
