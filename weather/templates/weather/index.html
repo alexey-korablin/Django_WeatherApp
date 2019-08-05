@@ -35,6 +35,9 @@
                         <div class="col-9">
                             <b>City: </b>{{ info.city }} <br>
                             <b>Temperature: </b>{{ info.temp }} <sup>o</sup><br>
+                            <b>Pressure: </b>{{ info.pressure }}<br>
+                            <b>Humidity: </b>{{ info.humidity }}<br>
+                            <b>Wind: </b>{{ info.wind.speed }}m/sec ({{ info.wind.direction }})
                         </div>
                         <div class="row-2 offset-1">
                             <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Photo" class="img-thumbnail">

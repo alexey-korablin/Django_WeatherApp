@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from .models import City
 from .forms import CityForm
+from .utils import weather_utils
 
 # Create your views here.
 
@@ -15,11 +16,13 @@ def index(request):
 
     if request.method == 'POST':
         form = CityForm(request.POST)
+        print(form)
+        print(CityForm)
         form.save()
 
     form = CityForm()
 
-    cities = City.objects.all()
+    cities = City.objects.all() # взять все объекты из таблицы City
     # print(cities)
 
     all_cities = []
@@ -27,9 +30,14 @@ def index(request):
     for city in cities:
         # print(city)
         res = requests.get(url.format(city)).json()  # метод .json() представляет данные в виде словаря
+        # print(res)
+        # print(weather_utils.wind_direction(res))
         city_info = {
             'city': city.name,
             'temp': res['main']['temp'],
+            'pressure': res['main']['pressure'],
+            'humidity': res['main']['humidity'],
+            'wind': weather_utils.wind_direction(res),
             'icon': res['weather'][0]['icon']
         }
         all_cities.append(city_info)
